@@ -1,0 +1,71 @@
+#creacion de un proyecto react
+npx create-react-app my-app //npx se usa para instalar las librerias de manera local en el proyecto y no de manera global en el sistema
+
+#remover en el index.js <React.StrictMode>, StrictMode es una herramienta para destacar problemas potenciales en la aplicación.
+#son ejecutadas en el modo de desarrollo; no van a impactar producción.
+
+#arrancar el proyecto
+npm start
+
+#extension .jsx: archivos javascript con codigo html
+
+#creando archivo .gitignore, excluyendo la carpeta node_modules del repositorio y limpiando cache del archivo
+touch .gitignore && echo "node_modules/" >> .gitignore && git rm -r --cached node_modules ; git status
+
+#create a new repository on the command line
+echo "# project-base-react" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/slipkool/project-base-react.git
+git push -u origin main
+
+#push an existing repository from the command line                
+git remote add origin https://github.com/slipkool/project-base-react.git
+git branch -M main
+git push -u origin main
+
+#plugins
+-ES7 React/Redux/GraphQL/React-Native snippets
+-ESLint (cuya función es la de revisar nuestro código tratando de encontrar errores que podrían provocar problemas de compilación 
+    o bien futuros bugs en nuestro desarrollo.)
+-npm intellisense (hacer los imports de forma mas rapida)
+-Path Intellisense
+-prettier
+
+#shortcuts
+Extensions command (Ctrl+Shift+X)
+Auto indent (Shift + Alt + F)
+command pallette (CTRL+SHIFT+P)
+
+#plugins web-browser
+React-developer-tools
+
+#instalar semantic ui react
+npm install semantic-ui-react semantic-ui-css
+import 'semantic-ui-css/semantic.min.css' en el index.js
+
+#instalar react router
+npm install react-router-dom
+#instalar history (The history library lets you easily manage session history anywhere JavaScript runs.)
+npm i history@4.10.1
+
+#inicializar ESLint
+npx eslint --init
+->To check syntax, find problems, and enforce code style
+->JavaScript modules
+->React
+->Use typescript? N
+->Browser
+->Use a popular style guide
+->Airbnb
+->Json
+->Install them? Y 
+
+#instalar prettier plugin
+npm i -D prettier eslint-plugin-prettier eslint-config-prettier babel-eslint
+#configarar el archivo .prettierrc y .eslintrc.json
+
+#cambiar el end of line sequence en vs code
+(CTRL+SHIFT+P) and type "Change All End Of Line Sequence" change LF by CRLF
