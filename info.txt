@@ -27,6 +27,7 @@ git branch -M main
 git push -u origin main
 
 #plugins
+-Material icon theme
 -ES7 React/Redux/GraphQL/React-Native snippets
 -ESLint (cuya función es la de revisar nuestro código tratando de encontrar errores que podrían provocar problemas de compilación 
     o bien futuros bugs en nuestro desarrollo.)

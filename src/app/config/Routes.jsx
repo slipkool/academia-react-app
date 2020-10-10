@@ -7,7 +7,7 @@ import Course from '../../pages/course/Course'
 import Student from '../../pages/student/Student'
 import Enrollment from '../../pages/enrollment/Enrollment'
 import CourseList from '../../pages/course/CourseList'
-import StudentList from '../../pages/student/StudentList'
+import StudentsList from '../../pages/student/StudentsList'
 import EnrollmentList from '../../pages/enrollment/EnrollmentList'
 
 const Routes = () => {
@@ -25,7 +25,7 @@ const Routes = () => {
                 <Route path="/course" component={Course} />
                 <Route path="/courses" component={CourseList} />
                 <Route path="/student" component={Student} />
-                <Route path="/students" component={StudentList} />
+                <Route path="/students" component={StudentsList} />
                 <Route path="/enrollment" component={Enrollment} />
                 <Route path="/enrollmentlist" component={EnrollmentList} />
               </Switch>
