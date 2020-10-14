@@ -6,16 +6,23 @@ import 'semantic-ui-css/semantic.min.css'
 import './app/layout/styles.css';
 import { createBrowserHistory } from 'history';
 import { Router } from 'react-router-dom';
+import configureStore from './app/store/configureStore';
+import { Provider } from 'react-redux';
 
 const history = createBrowserHistory();
 
+const rootEl = document.getElementById('root');
+
+const store = configureStore()
+
 const app = (
-    <Router history={history}>
-        <App/>
-    </Router>
+    <Provider store={store}>
+        <Router history={history}>
+            <App/>
+        </Router>
+    </Provider>
 );
 
-const rootEl = document.getElementById('root');
 
 ReactDOM.render(app, rootEl);
 

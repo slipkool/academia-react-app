@@ -1,18 +1,29 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { Breadcrumb, Button, Container, Divider, Grid, Header, Icon, Popup, Segment, Table } from 'semantic-ui-react';
 import StudentService from '../../app/api/StudentService'
+import LoadingComponent from '../../components/common/LoadingComponent';
+import { openModal, closeModal } from '../../app/store/actions/modalActions'
+import { connect } from 'react-redux';
 
-const StudentsList = () => {
+const actions = {
+  openModal,
+  closeModal,
+}
+
+const StudentsList = ({ openModal, closeModal }) => {
   const [studentsList, setStudentsList] = useState([]);
+  const [loading, setLoading] = useState(true)
 
   const fetchStudents = useCallback(
     async() => {
+      setLoading(true)
       try {
         const students = await StudentService.fetchStudents()
         if(students) setStudentsList(students)
       } catch (error) {
         console.error(error)
       }
+      setLoading(false)
     },
     [],
   )
@@ -89,6 +100,8 @@ const StudentsList = () => {
     )
   }
 
+  if(loading) return <LoadingComponent content="Loading Students..." />
+
   return (
     <>
       <Segment>
@@ -106,11 +119,11 @@ const StudentsList = () => {
         <Segment>
           <Button
             size="large"
-            content="New Customer"
+            content="New Student"
             icon="add user"
             color="purple"
             onClick={() => {
-              console.log('new student')
+              openModal(<div>Student form</div>)
             }}
           />
         </Segment>
@@ -126,4 +139,4 @@ const StudentsList = () => {
   )
 }
 
-export default StudentsList
+export default connect(null, actions)(StudentsList)

@@ -1,8 +1,14 @@
-import React from 'react';
-import Routes from '../config/Routes';
+import React from 'react'
+import ModalContainer from '../../components/modal/ModalContainer'
+import Routes from '../config/Routes'
 
 const App = () => {
-  return <Routes />
+  return (
+  <>
+    <ModalContainer />
+    <Routes />
+  </>
+  )
 }
 
-export default App;
+export default App

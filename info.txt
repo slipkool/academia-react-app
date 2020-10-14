@@ -70,3 +70,22 @@ npm i -D prettier eslint-plugin-prettier eslint-config-prettier babel-eslint
 
 #cambiar el end of line sequence en vs code
 (CTRL+SHIFT+P) and type "Change All End Of Line Sequence" change LF by CRLF
+
+#instalar prop-types (indica que parametros son necesarios para el uso de un componente especifico)
+npm i -S prop-types
+
+#instalar redux para el manejo de estado local
+npm i redux
+npm i redux react-redux
+
+#plugin de formulario
+final-form@4.18.6
+react-final-form@6.3.0
+#plugin de mensajes para el usuario
+react-toastify
+#permite acceder al estado, se necesita el plugin del navegador redux devtool
+redux-devtools-extension
+#llamada de metodos asincronos con redux
+redux-thunk
+#validador de formulario
+revalidate
