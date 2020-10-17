@@ -89,3 +89,6 @@ redux-devtools-extension
 redux-thunk
 #validador de formulario
 revalidate
+
+#instalar jwt
+npm i jwt-decode

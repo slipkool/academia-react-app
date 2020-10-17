@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getJwt } from '../config/auth/credentials';
 
 const http = axios.create({
     //baseURL: 'https://spring-boot-mitocode-webflux.herokuapp.com'
@@ -8,7 +9,7 @@ const http = axios.create({
 //To add token
 http.interceptors.request.use(
     (config) => {
-        const token = 'eyJhbGciOiJIUzUxMiJ9.eyJ0ZXN0IjoicHJvYmFuZG8uLi4uIiwicm9sZXMiOlsiQURNSU4iXSwic3ViIjoibWl0b2NvZGUiLCJpYXQiOjE2MDIyOTkxNTYsImV4cCI6MTYwMjMwMjc1Nn0.TY11WHzDUSm_qWAqxSZJ-Z842OcXpnT41SfCTDR0Witl84xbmn1Ku4m5bVlh4t-J5DgmQ53AqzKcSH4cJu4M2g';
+        const token = getJwt();
         if(token) config.headers.Authorization = `Bearer ${token}`;
         return config;
     },

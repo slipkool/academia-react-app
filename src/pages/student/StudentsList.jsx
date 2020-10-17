@@ -1,9 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { Breadcrumb, Button, Container, Divider, Grid, Header, Icon, Popup, Segment, Table } from 'semantic-ui-react';
+import { Breadcrumb, Button, Container, Divider, Grid, Header, Icon, Popup, Segment, Table } from 'semantic-ui-react'
 import StudentService from '../../app/api/StudentService'
-import LoadingComponent from '../../components/common/LoadingComponent';
+import LoadingComponent from '../../components/common/LoadingComponent'
 import { openModal, closeModal } from '../../app/store/actions/modalActions'
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
+import StudentForm from '../../components/students/StudentForm'
+import { toast } from 'react-toastify'
 
 const actions = {
   openModal,
@@ -11,8 +13,9 @@ const actions = {
 }
 
 const StudentsList = ({ openModal, closeModal }) => {
-  const [studentsList, setStudentsList] = useState([]);
+  const [studentsList, setStudentsList] = useState([])
   const [loading, setLoading] = useState(true)
+  const [loadingAction, setLoadingAction] = useState(false)
 
   const fetchStudents = useCallback(
     async() => {
@@ -31,6 +34,47 @@ const StudentsList = ({ openModal, closeModal }) => {
   useEffect(() => {
     fetchStudents()
   }, [fetchStudents])
+
+  const handlerCreateOrEdit = async (values) => {
+    try {
+      const studentUpdateList = [...studentsList]
+      if(values.id) {
+        const updateStudent = await StudentService.updateStudent(values)
+        const index = studentUpdateList.findIndex((a) => a.id === values.id)
+        studentUpdateList[index] = updateStudent
+        toast.success('The student selected was update')
+      }else {
+        const student = {
+          nombres: values.nombres,
+          apellidos: values.apellidos,
+          dni: values.dni,
+          edad: values.edad
+        }
+        const newStudent = await StudentService.addStudent(student)
+        studentUpdateList.push(newStudent)
+        toast.success('Added new student')
+      }
+      setStudentsList(studentUpdateList)
+    } catch (error) {
+      toast.error(error)
+    }
+    closeModal()
+  }
+
+  const handlerDelete = async (id) => {
+    setLoadingAction(true)
+    try {
+      let studentUpdateList = [...studentsList]
+      await StudentService.deleteStudent(id)
+      studentUpdateList = studentUpdateList.filter((a) => a.id !== id)
+      setStudentsList(studentUpdateList)
+      setLoadingAction(false)
+      toast.success('The student was deleted')
+    } catch (error) {
+      setLoadingAction(false)
+      toast.error(error)
+    }
+  } 
 
   let studentsListHtml = <h4>There no students</h4>
   if(studentsList && studentsList.length > 0) {
@@ -56,15 +100,7 @@ const StudentsList = ({ openModal, closeModal }) => {
                 <Popup
                   inverted
                   content="Update Customer"
-                  trigger={
-                    <Button
-                      color="violet"
-                      icon="edit"
-                      onClick={() => {
-                        console.log('edit')
-                      }}
-                    />
-                  }
+                  trigger={ <Button color="violet" icon="edit" onClick={() => { openModal(<StudentForm studentId={ student.id } submitHandler={ handlerCreateOrEdit } />) }} /> }
                 />
                 <Popup
                   inverted
@@ -74,7 +110,7 @@ const StudentsList = ({ openModal, closeModal }) => {
                       color="red"
                       icon="trash"
                       onClick={() => {
-                        console.log('delete')
+                        handlerDelete(student.id)
                       }}
                     />
                   }
@@ -123,7 +159,7 @@ const StudentsList = ({ openModal, closeModal }) => {
             icon="add user"
             color="purple"
             onClick={() => {
-              openModal(<div>Student form</div>)
+              openModal(<StudentForm  submitHandler={ handlerCreateOrEdit }/>)
             }}
           />
         </Segment>

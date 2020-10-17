@@ -1,7 +1,7 @@
 import { STUDENTS_ENDPOINT } from '../core/appConstants';
 import baseApi from './baseApi';
 
-const getStudentUrl = (id) => `${STUDENTS_ENDPOINT} /${id}`;
+const getStudentUrl = (id) => `${STUDENTS_ENDPOINT}/${id}`;
 
 class StudentService {
     static fetchStudents = () => baseApi.get(STUDENTS_ENDPOINT);
