@@ -28,7 +28,7 @@ const HomePage = ({ currentUser, token, openModal }) => {
         {currentUser && token ? (
           <>
             <Header as="h2" inverted content="Welcome to the best place for study" />
-            <Button size="huge" content="Go to Academy" inverted as={Link} to="/student" />
+            <Button size="huge" content="Go to Academy" inverted as={Link} to="/students" />
           </>
         ) : (
           <>
