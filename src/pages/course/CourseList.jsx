@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Segment, Breadcrumb, Table, Divider, Header, Icon, Popup, Button, Container, Grid } from 'semantic-ui-react'
+import { Segment, Breadcrumb, Table, Divider, Header, Icon, Popup, Button, Container, Grid, Checkbox } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
@@ -32,9 +32,9 @@ const CourseList = ({ fetchCourses, openModal, courses, loadingCourses, loadingC
       <Table>
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell width="5">Nombre</Table.HeaderCell>
-            <Table.HeaderCell width="2">Siglas</Table.HeaderCell>
-            <Table.HeaderCell width="2">Estado</Table.HeaderCell>
+            <Table.HeaderCell width="5">Name</Table.HeaderCell>
+            <Table.HeaderCell width="2">acronym</Table.HeaderCell>
+            <Table.HeaderCell width="2">State</Table.HeaderCell>
             <Table.HeaderCell width="2" />
           </Table.Row>
         </Table.Header>
@@ -43,7 +43,7 @@ const CourseList = ({ fetchCourses, openModal, courses, loadingCourses, loadingC
             <Table.Row key={course.id}>
               <Table.Cell>{course.nombre}</Table.Cell>
               <Table.Cell>{course.siglas}</Table.Cell>
-              <Table.Cell><div className="ui fitted toggle checkbox"><input type="radio" className="hidden" readOnly={true} checked={course.estado}/><label></label></div></Table.Cell>
+              <Table.Cell><Checkbox toggle readOnly={true} checked={course.estado} /></Table.Cell>
               <Table.Cell>
                 <Popup
                   inverted

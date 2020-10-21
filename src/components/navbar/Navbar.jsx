@@ -23,7 +23,6 @@ const Navbar = ({ currentUser, logout }) => {
         <Menu.Item>
           <Dropdown pointing="top left" text="Students">
             <Dropdown.Menu>
-              <Dropdown.Item text="New Student" icon="user plus" as={Link} to="/student" />
               <Dropdown.Item text="Students List" icon="list" as={Link} to="/students" />
             </Dropdown.Menu>
           </Dropdown>
@@ -31,7 +30,6 @@ const Navbar = ({ currentUser, logout }) => {
         <Menu.Item>
           <Dropdown pointing="top left" text="Courses">
             <Dropdown.Menu>
-              <Dropdown.Item text="New Course" icon="wordpress forms" as={Link} to="/course" />
               <Dropdown.Item text="Courses List" icon="list" as={Link} to="/courses" />
             </Dropdown.Menu>
           </Dropdown>
@@ -39,8 +37,8 @@ const Navbar = ({ currentUser, logout }) => {
         <Menu.Item>
           <Dropdown pointing="top left" text="Enrollment">
             <Dropdown.Menu>
-              <Dropdown.Item text="Enroll" icon="vcard" as={Link} to="/enrollment" />
-              <Dropdown.Item text="Enrollments List" icon="list" as={Link} to="/enrollmentslist" />
+              <Dropdown.Item text="New Enroll" icon="vcard" as={Link} to="/new-enrollment" />
+              <Dropdown.Item text="Enrollments List" icon="list" as={Link} to="/enrollmentlist" />
             </Dropdown.Menu>
           </Dropdown>
         </Menu.Item>

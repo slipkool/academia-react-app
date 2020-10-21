@@ -136,7 +136,7 @@ const StudentsList = ({ openModal, closeModal }) => {
     )
   }
 
-  if(loading) return <LoadingComponent content="Loading Students..." />
+  if(loading || loadingAction) return <LoadingComponent content="Loading Students..." />
 
   return (
     <>
