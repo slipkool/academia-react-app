@@ -92,3 +92,33 @@ revalidate
 
 #instalar jwt
 npm i jwt-decode
+
+
+################################################################################
+#Variables de entorno (deben empezar con REACT_APP_[Nombre variable])
+
+#Generando artefacto para pdn
+npm run build
+npx serve -s build
+
+#Instalar heroku CLI en caso de no tenerlo instalado
+https://devcenter.heroku.com/articles/heroku-cli
+
+heroku login
+git init
+
+#Si crean la app por la web de heroku agregar este buildpack en la pestaña de settings en la zona de buildpacks
+https://buildpack-registry.s3.amazonaws.com/buildpacks/mars/create-react-app.tgz
+
+#crear app en heroku con buildpack para proyectos creados con create-react-app
+heroku create [Nombre de la aplicacion] --buildpack mars/create-react-app
+
+#crear las variables de entorno en heroku
+dentro de la aplicacion creada -> settings, click en el boton Reveal Config Vars, y creamos las variables del archivo .env.production
+
+#actualizar repositorio local
+git add .
+git commit -m "Some Message"
+
+#finalmente subir build a heroku
+git push heroku master

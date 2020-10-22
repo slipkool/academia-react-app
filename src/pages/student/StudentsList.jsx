@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Breadcrumb, Button, Container, Divider, Grid, Header, Icon, Popup, Segment, Table } from 'semantic-ui-react'
 import StudentService from '../../app/api/StudentService'
 import LoadingComponent from '../../components/common/LoadingComponent'
@@ -6,6 +6,7 @@ import { openModal, closeModal } from '../../app/store/actions/modalActions'
 import { connect } from 'react-redux'
 import StudentForm from '../../components/students/StudentForm'
 import { toast } from 'react-toastify'
+import useFetchStudents from '../../app/hook/useFetchStudents'
 
 const actions = {
   openModal,
@@ -17,23 +18,15 @@ const StudentsList = ({ openModal, closeModal }) => {
   const [loading, setLoading] = useState(true)
   const [loadingAction, setLoadingAction] = useState(false)
 
-  const fetchStudents = useCallback(
-    async() => {
-      setLoading(true)
-      try {
-        const students = await StudentService.fetchStudents()
-        if(students) setStudentsList(students)
-      } catch (error) {
-        console.error(error)
-      }
-      setLoading(false)
-    },
-    [],
-  )
+  const [students] = useFetchStudents()
 
   useEffect(() => {
-    fetchStudents()
-  }, [fetchStudents])
+    setLoading(true)
+    if(students) {
+      setStudentsList(students)
+      setLoading(false)
+    }
+  }, [students])
 
   const handlerCreateOrEdit = async (values) => {
     try {

@@ -32,7 +32,7 @@ const App = ({ getUser, authenticated }) => {
     <ModalContainer />
     {/* div con mensaje */}
     <ToastContainer position="bottom-right" />
-    <Routes />
+    <Routes authenticated={authenticated} />
   </>
   )
 }

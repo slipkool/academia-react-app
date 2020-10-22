@@ -5,8 +5,7 @@ import { getJwt } from '../config/auth/credentials';
 import history from '../..' //significa que esta definido en el index
 
 const http = axios.create({
-    //baseURL: 'https://spring-boot-mitocode-webflux.herokuapp.com'
-    baseURL: 'http://localhost:8080'
+    baseURL: process.env.REACT_APP_API_URL
 });
 
 http.interceptors.response.use(undefined, (error) => {
@@ -18,11 +17,14 @@ http.interceptors.response.use(undefined, (error) => {
     }
   
     const { status, data, config } = error.response
-/*
-    if(status === 401 && headers['www-authenticate'].includes('Bearer error="invalid_token", error_description="The token expired"')) {
 
+    if(status === 401 && config.headers['www-authenticate'].includes('Bearer error="invalid_token", error_description="The token expired"')) {
+      toast.error('Network error - make sure the API server is running')
+      window.localStorage.removeItem(TOKEN_KEY)
+      history.push('/')
+      toast.info('Your session has expired, please login again')
     }
- */ 
+ 
     if (status === 404) {
       history.push('/notFound')
     }
@@ -46,7 +48,9 @@ http.interceptors.request.use(
         if(token) config.headers.Authorization = `Bearer ${token}`;
         return config;
     },
-    (error) => Promise.reject(error)
+    (error) => {
+      return Promise.reject(error)
+    }
 );
 
 const responseBody = (response) => response.data;

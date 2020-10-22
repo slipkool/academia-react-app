@@ -11,6 +11,8 @@ import configureStore from './app/store/configureStore';
 import { Provider } from 'react-redux';
 import ScrollToTop from './components/common/ScrollToTop';
 
+console.log(`The app is running on ${process.env.REACT_APP_ENV}`)
+
 const history = createBrowserHistory();
 
 const rootEl = document.getElementById('root');

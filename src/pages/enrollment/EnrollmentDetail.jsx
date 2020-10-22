@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import PropTypes from 'prop-types'
-import { Breadcrumb, Checkbox, Container, Divider, Grid, Header, Icon, Segment, Table } from 'semantic-ui-react'
+import { Breadcrumb, Button, Checkbox, Container, Divider, Grid, Header, Icon, Segment, Table } from 'semantic-ui-react'
 
 import StudentService from '../../app/api/StudentService'
 import CourseService from '../../app/api/CourseService'
@@ -138,6 +138,15 @@ const EnrollmentDetail = ({ match }) => {
           Enrollment Detail
         </Header>
       </Divider>
+      <Segment>
+          <Button
+            size="large"
+            content="New Enroll"
+            icon="add user"
+            color="purple"
+            as={Link} to="/new-enrollment"
+          />
+        </Segment>
       <Container>
         <Grid columns="3">
           <Grid.Column width="3" />
